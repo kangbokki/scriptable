@@ -27,7 +27,16 @@ async function writeText(text = '') {
     data = fm.readString(dataPath);
   }
 
-  fm.writeString(dataPath, `${data}\n${text}`);
+  if ( data.includes(text) ) {
+    const alert = new Alert();
+
+    alert.title = '중복';
+    alert.addCancelAction('확인');
+
+    const result = await alert.present();
+  } else {
+    fm.writeString(dataPath, `${data}\n${text}`);
+  }
 };
 
 Script.complete();
